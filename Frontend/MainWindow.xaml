@@ -66,7 +66,7 @@
                     <Button Click="SprintThree_Click" Margin="0 15 0 15" Style="{StaticResource CustomButtonStyle}">
                         <TextBlock><Run FontWeight="Bold">Sprint</Run> - 3'</TextBlock>
                     </Button>
-                    <Button Click="Custom_Click" Margin="0 60 0 15" Style="{StaticResource CustomButtonStyle}">
+                    <Button Click="Custom_Click" Margin="0 60 0 15" Style="{StaticResource CustomButtonStyle}" IsEnabled="False">
                         <TextBlock><Run FontWeight="Bold">Custom</Run></TextBlock>
                     </Button>
                     <Button Click="Settings_Click" Margin="0 60 0 15" Style="{StaticResource CustomButtonStyle}">
