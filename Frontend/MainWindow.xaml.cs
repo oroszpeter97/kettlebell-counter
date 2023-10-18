@@ -2,6 +2,7 @@
 using Backend.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Media;
 using System.Threading.Tasks;
 using System.Timers;
@@ -67,7 +68,9 @@ namespace Frontend
             {
                 Task.Factory.StartNew(() => 
                 {
-                    var uri = new Uri(@"C:\Users\orosz\source\repos\oroszpeter97\kettlebell-counter\Frontend\whistle.mp3", UriKind.RelativeOrAbsolute);
+                    var buildpath = Directory.GetCurrentDirectory();
+                    var soundpath = Path.Combine(buildpath, "whistle.mp3");
+                    var uri = new Uri(soundpath, UriKind.RelativeOrAbsolute);
                     var player = new MediaPlayer();
 
                     player.Open(uri);
@@ -156,9 +159,11 @@ namespace Frontend
                 new ExerciseNode(2, "Rest", 300, 0),
                 new ExerciseNode(1, "Clean&Press", 360, 60),
                 new ExerciseNode(2, "Rest", 300, 0),
+                new ExerciseNode(1, "Jerk", 360, 120),
+                new ExerciseNode(2, "Rest", 300, 0),
                 new ExerciseNode(1, "Half Snatch", 360, 108),
                 new ExerciseNode(2, "Rest", 300, 0),
-                new ExerciseNode(1, "Clean", 360, 120)
+                new ExerciseNode(1, "Push Press", 360, 120)
             };
 
             Exercise pentathlon = new Exercise("Pentathlon", exerciseNodes);
@@ -172,13 +177,15 @@ namespace Frontend
             List<ExerciseNode> exerciseNodes = new List<ExerciseNode>
             {
                 new ExerciseNode(0, "Rest", 5, 0),
-                new ExerciseNode(1, "Clean", 120, 60),
+                new ExerciseNode(1, "Clean", 180, 60),
                 new ExerciseNode(2, "Rest", 120, 0),
-                new ExerciseNode(1, "Clean&Press", 120, 30),
+                new ExerciseNode(1, "Clean&Press", 180, 30),
                 new ExerciseNode(2, "Rest", 120, 0),
-                new ExerciseNode(1, "Half Snatch", 120, 54),
+                new ExerciseNode(1, "Jerk", 180, 60),
                 new ExerciseNode(2, "Rest", 120, 0),
-                new ExerciseNode(1, "Clean", 120, 60)
+                new ExerciseNode(1, "Half Snatch", 180, 54),
+                new ExerciseNode(2, "Rest", 120, 0),
+                new ExerciseNode(1, "Push Press", 180, 60)
             };
 
             Exercise halfPentathlon = new Exercise("Half Pentathlon", exerciseNodes);
@@ -206,10 +213,10 @@ namespace Frontend
             List<ExerciseNode> exerciseNodes = new List<ExerciseNode>
             {
                 new ExerciseNode(0, "Rest", 5, 0),
-                new ExerciseNode(1, "Sprint", 300, int.MaxValue)
+                new ExerciseNode(1, " ", 300, int.MaxValue)
             };
 
-            Exercise sprint = new Exercise("Sprint - 5'", exerciseNodes);
+            Exercise sprint = new Exercise("5 Min", exerciseNodes);
 
             _currentExercise = sprint;
             _currentGrid = TimerStartGrid;
@@ -220,10 +227,10 @@ namespace Frontend
             List<ExerciseNode> exerciseNodes = new List<ExerciseNode>
             {
                 new ExerciseNode(0, "Rest", 5, 0),
-                new ExerciseNode(1, "Sprint", 600, int.MaxValue)
+                new ExerciseNode(1, " ", 600, int.MaxValue)
             };
 
-            Exercise sprint = new Exercise("Sprint - 10'", exerciseNodes);
+            Exercise sprint = new Exercise("10 Min", exerciseNodes);
 
             _currentExercise = sprint;
             _currentGrid = TimerStartGrid;
@@ -234,10 +241,10 @@ namespace Frontend
             List<ExerciseNode> exerciseNodes = new List<ExerciseNode>
             {
                 new ExerciseNode(0, "Rest", 5, 0),
-                new ExerciseNode(1, "Sprint", 720, int.MaxValue)
+                new ExerciseNode(1, " ", 720, int.MaxValue)
             };
 
-            Exercise sprint = new Exercise("Sprint - 12'", exerciseNodes);
+            Exercise sprint = new Exercise("12 Min", exerciseNodes);
 
             _currentExercise = sprint;
             _currentGrid = TimerStartGrid;
@@ -248,10 +255,10 @@ namespace Frontend
             List<ExerciseNode> exerciseNodes = new List<ExerciseNode>
             {
                 new ExerciseNode(0, "Rest", 5, 0),
-                new ExerciseNode(1, "Sprint", 1800, int.MaxValue)
+                new ExerciseNode(1, " ", 1800, int.MaxValue)
             };
 
-            Exercise sprint = new Exercise("Sprint - 30'", exerciseNodes);
+            Exercise sprint = new Exercise("30 Min", exerciseNodes);
 
             _currentExercise = sprint;
             _currentGrid = TimerStartGrid;
@@ -262,10 +269,10 @@ namespace Frontend
             List<ExerciseNode> exerciseNodes = new List<ExerciseNode>
             {
                 new ExerciseNode(0, "Rest", 5, 0),
-                new ExerciseNode(1, "Sprint", 3600, int.MaxValue)
+                new ExerciseNode(1, " ", 3600, int.MaxValue)
             };
 
-            Exercise sprint = new Exercise("Sprint - 60'", exerciseNodes);
+            Exercise sprint = new Exercise("60 Min", exerciseNodes);
 
             _currentExercise = sprint;
             _currentGrid = TimerStartGrid;
@@ -373,7 +380,6 @@ namespace Frontend
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            Key pressedKey = e.Key;
             if (_currentExercise is null || _currentExercise.CurrentNode is null) return;
 
             if((e.Key == Key.Space || e.Key == Key.Up) && _currentExercise.CurrentNode.Reps < _currentExercise.CurrentNode.MaxReps)

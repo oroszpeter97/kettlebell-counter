@@ -288,7 +288,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Column="2">
-                <Button Click="Cancel_Click" Content="Cancel" MaxHeight="30" MinWidth="200" Margin="10 15 10 15" Style="{StaticResource CustomButtonStyle}" />
+                <Button Click="Cancel_Click" Content="Cancel" MaxHeight="25" MaxWidth="100" Margin="100 50 10 15" Style="{StaticResource CustomButtonStyle}" VerticalAlignment="Top" />
             </Grid>
         </Grid>
         <Grid x:Name="TimerEndGrid" Visibility="Collapsed">
