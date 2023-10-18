@@ -63,7 +63,7 @@ namespace Frontend
             if (_currentExercise is null) return;
             if (_currentExercise.CurrentNode is null) return;
 
-            if (_currentExercise.NodePointer == 1 && previousNode == 0)
+            if (_currentExercise.NodePointer == 1 && previousNode == 0 && _settings.IsSoundOn)
             {
                 Task.Factory.StartNew(() => 
                 {
