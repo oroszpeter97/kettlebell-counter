@@ -37,7 +37,7 @@ namespace Frontend
 
         private void FixedUpdate()
         {
-            if (_currentExercise is not null && _currentExercise.CurrentNode is not null && _currentExercise.CurrentNode.Elapsed > _currentExercise.CurrentNode.Length)
+            if (_currentExercise is not null && _currentExercise.CurrentNode is not null && _currentExercise.CurrentNode.Elapsed >= _currentExercise.CurrentNode.Length)
             {
                 if (_currentExercise.NodePointer < _currentExercise.ExerciseNodes.Count - 1)
                 {
